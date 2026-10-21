@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevPulse — Modern Developer Productivity Dashboard</title>
+  <meta name="description" content="An open-source, modular, client-side developer dashboard featuring GitHub activity analytics, customizable Pomodoro focus timer with ambient soundscapes, daily task kanban, and Markdown scratchpad.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome CDN for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Modular Styles -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/github.css">
+  <link rel="stylesheet" href="css/pomodoro.css">
+  <link rel="stylesheet" href="css/tasks-notes.css">
+</head>
+<body class="theme-dark">
+  <!-- Dynamic Background Glow Elements -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <div class="app-container">
+    <!-- Header / Navbar -->
+    <header class="app-header glass-panel">
+      <div class="brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-bolt-lightning"></i>
+        </div>
+        <div class="brand-text">
+          <h1>DevPulse <span class="badge-tag">OSS</span></h1>
+          <p class="tagline">Developer Command & Productivity Hub</p>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="live-clock" id="liveClock">
+          <span class="clock-time" id="clockTime">00:00:00</span>
+          <span class="clock-date" id="clockDate">Mon, Jan 01</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="quickGithubBtn" class="btn btn-ghost" title="Search GitHub Developer">
+          <i class="fa-brands fa-github"></i> <span class="desktop-only">Lookup Dev</span>
+        </button>
+        <button id="themeToggleBtn" class="btn btn-icon" title="Toggle Theme" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="https://github.com" target="_blank" rel="noopener" class="btn btn-primary" id="repoLink">
+          <i class="fa-solid fa-code-fork"></i>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Grid Dashboard -->
+    <main class="dashboard-grid">
+      <!-- COLUMN 1: Developer Focus & Analytics (GitHub + Pomodoro) -->
+      <section class="grid-col col-left">
+        <!-- Module 1: GitHub Developer Explorer -->
+        <div class="card glass-panel" id="githubModuleCard">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="fa-brands fa-github text-accent"></i>
+              <h2>GitHub Activity Pulse</h2>
+            </div>
+            <div class="card-actions">
+              <span class="status-indicator live" id="ghStatusDot"></span>
+              <span class="status-text">Live REST API</span>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <form id="ghUserForm" class="search-bar">
+              <div class="input-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="ghUsernameInput" placeholder="Enter GitHub username (e.g. torvalds)" required autocomplete="off">
+              </div>
+              <button type="submit" class="btn btn-accent" id="ghFetchBtn">
+                <span>Fetch</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </form>
+
+            <div id="ghProfileContainer" class="gh-profile-container">
+              <!-- Dynamically populated by js/modules/github.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Module 2: Focus & Ambient Sound Pomodoro Engine -->
+        <div class="card glass-panel" id="pomodoroModuleCard">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="fa-solid fa-stopwatch text-accent"></i>
+              <h2>Focus Engine & Ambient Audio</h2>
+            </div>
+            <div class="card-actions">
+              <span class="badge" id="sessionCounterBadge">Session #1</span>
+            </div>
+          </div>
+
+          <div class="card-body pomodoro-body">
+            <!-- Mode Selector -->
+            <div class="pomo-mode-tabs" role="tablist">
+              <button class="pomo-tab active" data-mode="pomodoro" id="modePomo">Pomodoro (25m)</button>
+              <button class="pomo-tab" data-mode="shortBreak" id="modeShort">Short Break (5m)</button>
+              <button class="pomo-tab" data-mode="longBreak" id="modeLong">Long Break (15m)</button>
+            </div>
+
+            <!-- Timer Ring Display -->
+            <div class="pomo-timer-wrapper">
+              <div class="pomo-timer-display" id="pomoTimeDisplay">25:00</div>
+              <div class="pomo-timer-label" id="pomoStatusLabel">Time to concentrate!</div>
+              
+              <div class="pomo-progress-track">
+                <div class="pomo-progress-fill" id="pomoProgressFill"></div>
+              </div>
+            </div>
+
+            <!-- Timer Controls -->
+            <div class="pomo-controls">
+              <button class="btn btn-secondary btn-icon" id="pomoResetBtn" title="Reset Timer">
+                <i class="fa-solid fa-rotate-left"></i>
+              </button>
+              <button class="btn btn-accent btn-large" id="pomoToggleBtn">
+                <i class="fa-solid fa-play" id="pomoPlayIcon"></i>
+                <span id="pomoToggleText">Start Session</span>
+              </button>
+              <button class="btn btn-secondary btn-icon" id="pomoSkipBtn" title="Skip to Next Cycle">
+                <i class="fa-solid fa-forward-step"></i>
+              </button>
+            </div>
+
+            <!-- Ambient Soundscapes (Web Audio Synthesizer) -->
+            <div class="ambient-audio-section">
+              <div class="ambient-header">
+                <span><i class="fa-solid fa-headphones-simple"></i> Ambient Focus Soundscapes</span>
+                <span class="ambient-status" id="ambientStatus">Off</span>
+              </div>
+              <div class="soundscape-chips">
+                <button class="sound-chip active" data-sound="off">Mute</button>
+                <button class="sound-chip" data-sound="rain">🌧️ Raindrops</button>
+                <button class="sound-chip" data-sound="white">💨 White Noise</button>
+                <button class="sound-chip" data-sound="binaural">🧘 Deep Focus 40Hz</button>
+                <button class="sound-chip" data-sound="waves">🌊 Ocean Waves</button>
+              </div>
+              <div class="volume-slider-wrapper">
+                <i class="fa-solid fa-volume-low"></i>
+                <input type="range" id="ambientVolume" min="0" max="100" value="40" aria-label="Volume">
+                <i class="fa-solid fa-volume-high"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 2: Workflow & Knowledge (Tasks + Markdown Scratchpad) -->
+      <section class="grid-col col-right">
+        <!-- Module 3: Priority Task Planner -->
+        <div class="card glass-panel" id="tasksModuleCard">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="fa-solid fa-list-check text-accent"></i>
+              <h2>Sprint Tasks & Action Items</h2>
+            </div>
+            <div class="card-actions">
+              <span class="badge" id="tasksCountBadge">0 Completed</span>
+              <button class="btn btn-ghost btn-sm" id="clearCompletedTasksBtn" title="Clear Done Tasks">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <!-- Add Task Form -->
+            <form id="newTaskForm" class="new-task-form">
+              <div class="input-wrapper">
+                <input type="text" id="newTaskInput" placeholder="Add a new task (e.g., Fix issue #4 in repo)..." required autocomplete="off">
+              </div>
+              <select id="taskPrioritySelect" class="priority-select">
+                <option value="high">🔴 High</option>
+                <option value="medium" selected>🟡 Medium</option>
+                <option value="low">🟢 Low</option>
+              </select>
+              <button type="submit" class="btn btn-accent btn-sm">
+                <i class="fa-solid fa-plus"></i> Add
+              </button>
+            </form>
+
+            <!-- Filter tabs -->
+            <div class="task-filter-tabs">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="pending">Pending</button>
+              <button class="filter-btn" data-filter="completed">Done</button>
+            </div>
+
+            <!-- Task List -->
+            <ul class="task-list" id="taskListContainer">
+              <!-- Dynamically populated by js/modules/tasks.js -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Module 4: Live Markdown Scratchpad & Code Snippets -->
+        <div class="card glass-panel" id="notesModuleCard">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="fa-solid fa-code text-accent"></i>
+              <h2>Markdown Scratchpad & Notes</h2>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-ghost btn-sm" id="toggleNoteModeBtn" title="Toggle Edit/Preview">
+                <i class="fa-regular fa-eye"></i> <span id="previewModeLabel">Preview</span>
+              </button>
+              <button class="btn btn-ghost btn-sm" id="exportNoteMdBtn" title="Download .md file">
+                <i class="fa-solid fa-download"></i> <span class="desktop-only">Export .md</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body notes-body">
+            <div class="notes-toolbar">
+              <button class="tool-btn" data-tag="bold" title="Bold"><b>B</b></button>
+              <button class="tool-btn" data-tag="italic" title="Italic"><i>I</i></button>
+              <button class="tool-btn" data-tag="heading" title="Heading">H2</button>
+              <button class="tool-btn" data-tag="code" title="Code Block">&lt;/&gt;</button>
+              <button class="tool-btn" data-tag="list" title="Bullet List">• List</button>
+              <button class="tool-btn" data-tag="task" title="Checklist">[x] Task</button>
+              <span class="toolbar-spacer"></span>
+              <span class="char-count" id="notesWordCount">0 words</span>
+            </div>
+
+            <div class="notes-editor-container">
+              <textarea id="notesEditor" class="notes-textarea" placeholder="Write markdown thoughts, PR notes, or code snippets here..."></textarea>
+              <div id="notesPreview" class="notes-preview hidden"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer glass-panel">
+      <div class="footer-left">
+        <p><strong>DevPulse</strong> — Open Source Developer Productivity Hub | Built for Mumbai University ROSPL</p>
+      </div>
+      <div class="footer-center">
+        <span class="license-tag"><i class="fa-solid fa-scale-balanced"></i> MIT Licensed</span>
+        <span class="tech-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
+        <span class="tech-tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+        <span class="tech-tag"><i class="fa-brands fa-js"></i> ES6+ Modules</span>
+      </div>
+      <div class="footer-right">
+        <a href="#repoLink" class="footer-link"><i class="fa-brands fa-github"></i> 4 Team Contributors</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Application Modular Scripts -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
