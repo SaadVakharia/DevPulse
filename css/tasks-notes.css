@@ -1,0 +1,299 @@
+/* ==========================================================================
+   DevPulse - Tasks & Notes Module Styling
+   Module 4: Member 4
+   ========================================================================== */
+
+/* Task Form */
+.new-task-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.priority-select {
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.8rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.priority-select option {
+  background: var(--bg-secondary);
+  color: var(--text-main);
+}
+
+/* Task Filter Tabs */
+.task-filter-tabs {
+  display: flex;
+  gap: 0.35rem;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 0.5rem;
+}
+
+.filter-btn {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  color: var(--text-main);
+}
+
+.filter-btn.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent-cyan);
+}
+
+/* Task List */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.task-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.task-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.task-item.completed {
+  opacity: 0.55;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--text-dim);
+}
+
+.task-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--text-dim);
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.task-checkbox:checked {
+  background: var(--accent-emerald);
+  border-color: var(--accent-emerald);
+}
+
+.task-checkbox:checked::after {
+  content: '✓';
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.task-text {
+  flex: 1;
+  font-size: 0.82rem;
+  color: var(--text-main);
+  word-break: break-word;
+}
+
+.task-priority-tag {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.priority-high {
+  background: rgba(244, 63, 94, 0.15);
+  color: #fb7185;
+}
+
+.priority-medium {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fcd34d;
+}
+
+.priority-low {
+  background: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+}
+
+.task-del-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 0.25rem;
+  opacity: 0;
+  transition: opacity var(--transition-fast), color var(--transition-fast);
+}
+
+.task-item:hover .task-del-btn {
+  opacity: 1;
+}
+
+.task-del-btn:hover {
+  color: var(--accent-rose);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+}
+
+/* Markdown Notes Module */
+.notes-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.notes-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-glass);
+}
+
+.tool-btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.72rem;
+  font-family: inherit;
+  font-weight: 600;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tool-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+}
+
+.toolbar-spacer {
+  flex: 1;
+}
+
+.char-count {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+.notes-editor-container {
+  min-height: 200px;
+  max-height: 280px;
+  display: flex;
+  position: relative;
+}
+
+.notes-textarea {
+  width: 100%;
+  height: 200px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem;
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.notes-textarea:focus {
+  border-color: var(--accent-indigo);
+}
+
+.notes-preview {
+  width: 100%;
+  min-height: 200px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+.notes-preview.hidden {
+  display: none;
+}
+
+.notes-preview h1, .notes-preview h2, .notes-preview h3 {
+  margin: 0.6rem 0 0.3rem 0;
+  color: var(--accent-cyan);
+}
+
+.notes-preview code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+}
+
+.notes-preview pre {
+  background: rgba(0, 0, 0, 0.45);
+  padding: 0.65rem;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  margin: 0.5rem 0;
+}
+
+.notes-preview ul {
+  padding-left: 1.25rem;
+  margin: 0.4rem 0;
+}
