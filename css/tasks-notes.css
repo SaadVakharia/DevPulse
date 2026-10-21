@@ -1,6 +1,6 @@
 /* ==========================================================================
    DevPulse - Tasks & Notes Module Styling
-   Module 4: Member 4
+   Clean, Professional Developer Tooling (Linear/Raycast Style)
    ========================================================================== */
 
 /* Task Form */
@@ -10,10 +10,25 @@
   flex-wrap: wrap;
 }
 
+.new-task-form .input-wrapper input {
+  padding: 0.55rem 0.85rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.82rem;
+  outline: none;
+}
+
+.new-task-form .input-wrapper input:focus {
+  border-color: var(--border-focus);
+}
+
 .priority-select {
   padding: 0.5rem 0.75rem;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--border-glass);
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   color: var(--text-main);
   font-family: inherit;
@@ -23,7 +38,7 @@
 }
 
 .priority-select option {
-  background: var(--bg-secondary);
+  background: var(--bg-card);
   color: var(--text-main);
 }
 
@@ -31,15 +46,15 @@
 .task-filter-tabs {
   display: flex;
   gap: 0.35rem;
-  border-bottom: 1px solid var(--border-glass);
-  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.6rem;
 }
 
 .filter-btn {
-  padding: 0.25rem 0.6rem;
+  padding: 0.3rem 0.7rem;
   font-size: 0.75rem;
   font-weight: 600;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   color: var(--text-muted);
   border-radius: var(--radius-sm);
@@ -49,11 +64,13 @@
 
 .filter-btn:hover {
   color: var(--text-main);
+  background: var(--bg-secondary);
 }
 
 .filter-btn.active {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--accent-cyan);
+  background: var(--bg-secondary);
+  border-color: var(--border-subtle);
+  color: var(--accent-primary);
 }
 
 /* Task List */
@@ -68,11 +85,11 @@
 }
 
 .task-list::-webkit-scrollbar {
-  width: 4px;
+  width: 5px;
 }
 
 .task-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--border-subtle);
   border-radius: 4px;
 }
 
@@ -81,19 +98,18 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.65rem 0.85rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border-glass);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
 }
 
 .task-item:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--border-hover);
 }
 
 .task-item.completed {
-  opacity: 0.55;
+  opacity: 0.5;
 }
 
 .task-item.completed .task-text {
@@ -103,8 +119,8 @@
 
 .task-checkbox {
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   border: 1.5px solid var(--text-dim);
   border-radius: 4px;
   cursor: pointer;
@@ -113,6 +129,7 @@
   justify-content: center;
   transition: all var(--transition-fast);
   flex-shrink: 0;
+  background: var(--bg-input);
 }
 
 .task-checkbox:checked {
@@ -123,7 +140,7 @@
 .task-checkbox:checked::after {
   content: '✓';
   color: #fff;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 800;
 }
 
@@ -136,25 +153,28 @@
 
 .task-priority-tag {
   font-size: 0.65rem;
-  padding: 0.15rem 0.4rem;
+  padding: 0.15rem 0.45rem;
   border-radius: var(--radius-pill);
   font-weight: 600;
   text-transform: uppercase;
 }
 
 .priority-high {
-  background: rgba(244, 63, 94, 0.15);
-  color: #fb7185;
+  background: rgba(244, 63, 94, 0.12);
+  color: var(--accent-rose);
+  border: 1px solid rgba(244, 63, 94, 0.25);
 }
 
 .priority-medium {
-  background: rgba(245, 158, 11, 0.15);
-  color: #fcd34d;
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--accent-amber);
+  border: 1px solid rgba(245, 158, 11, 0.25);
 }
 
 .priority-low {
-  background: rgba(16, 185, 129, 0.15);
-  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--accent-emerald);
+  border: 1px solid rgba(16, 185, 129, 0.25);
 }
 
 .task-del-btn {
@@ -163,7 +183,7 @@
   color: var(--text-dim);
   cursor: pointer;
   padding: 0.25rem;
-  opacity: 0;
+  opacity: 0.3;
   transition: opacity var(--transition-fast), color var(--transition-fast);
 }
 
@@ -192,28 +212,29 @@
 .notes-toolbar {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  background: rgba(0, 0, 0, 0.25);
-  padding: 0.35rem 0.5rem;
+  gap: 0.35rem;
+  background: var(--bg-secondary);
+  padding: 0.35rem 0.6rem;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-glass);
+  border: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
 }
 
 .tool-btn {
-  padding: 0.25rem 0.5rem;
+  padding: 0.3rem 0.55rem;
   font-size: 0.72rem;
   font-family: inherit;
   font-weight: 600;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
   color: var(--text-muted);
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .tool-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-hover);
   color: var(--text-main);
 }
 
@@ -237,8 +258,8 @@
 .notes-textarea {
   width: 100%;
   height: 200px;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--border-glass);
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 0.85rem;
   color: var(--text-main);
@@ -251,7 +272,7 @@
 }
 
 .notes-textarea:focus {
-  border-color: var(--accent-indigo);
+  border-color: var(--border-focus);
 }
 
 .notes-preview {
@@ -259,8 +280,8 @@
   min-height: 200px;
   max-height: 280px;
   overflow-y: auto;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--border-glass);
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 0.85rem;
   font-size: 0.85rem;
@@ -274,19 +295,21 @@
 
 .notes-preview h1, .notes-preview h2, .notes-preview h3 {
   margin: 0.6rem 0 0.3rem 0;
-  color: var(--accent-cyan);
+  color: var(--accent-primary);
 }
 
 .notes-preview code {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
   padding: 0.15rem 0.35rem;
   border-radius: 4px;
   font-family: var(--font-mono);
-  font-size: 0.8em;
+  font-size: 0.85em;
 }
 
 .notes-preview pre {
-  background: rgba(0, 0, 0, 0.45);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
   padding: 0.65rem;
   border-radius: var(--radius-sm);
   overflow-x: auto;
