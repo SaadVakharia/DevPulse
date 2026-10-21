@@ -93,10 +93,10 @@ DevPulse has **zero npm dependencies** and requires **no build step**. It runs n
 
 This project was built collaboratively by a team of 4 engineering students:
 
-- **Member 1 (Lead Developer)**: Core Application Architecture, Glassmorphism Design System, Global Store (`app.js`, `store.js`, `main.css`).
-- **Member 2**: GitHub REST API Analytics & Repository Explorer Module (`modules/github.js`, `css/github.css`).
-- **Member 3**: Focus Pomodoro Engine & Web Audio Soundscape Synthesizer (`modules/pomodoro.js`, `css/pomodoro.css`).
-- **Member 4**: Sprint Task Kanban & Live Markdown Scratchpad Module (`modules/tasks.js`, `modules/notes.js`, `css/tasks-notes.css`).
+1. **Arham Bukhari** (Roll No: 09, BEIT-1): Sprint Task Kanban & Live Markdown Scratchpad Module (`modules/tasks.js`, `modules/notes.js`, `css/tasks-notes.css`).
+2. **Shoaib Munshi** (Roll No: 69, BEIT-1): GitHub REST API Analytics & Repository Explorer Module (`modules/github.js`, `css/github.css`).
+3. **Shivansh Singh** (Roll No: 117, BEIT-2): Focus Pomodoro Engine & Web Audio Soundscape Synthesizer (`modules/pomodoro.js`, `css/pomodoro.css`).
+4. **Saad Vakharia** (Roll No: 155, BEIT-2): Core Application Architecture, Design System, Global Store (`app.js`, `store.js`, `main.css`).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for individual branch logs and pull request history.
 
